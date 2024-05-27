@@ -1,0 +1,27 @@
+.menu {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    height: 90px;
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+.menuLive {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menuLive img{
+    width: 160px;
+}
+
+.menuTime h2:nth-child(2),
+.menuScore h2:nth-child(2) {
+    margin-top: 1rem;
+}
+
+
