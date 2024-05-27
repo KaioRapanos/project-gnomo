@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import state from '../../engine';
 import style from './Panel.module.css';
+import gameOver from '../../assets/audios/gameOver.mp3'
+import multiplo10 from '../../assets/audios/multiplo10.mp3'
+import multiplo50 from '../../assets/audios/multiplo50.mp3'
+import hit from '../../assets/audios/hit.mp3'
 
 const Panel = () => {
   const [squares, setSquares] = useState([]);
@@ -38,7 +42,7 @@ const Panel = () => {
   );
 };
 
-let previousRandomNumber = -1; // Armazena a posição anterior, -1 garante que na primeira execução não haja conflito
+let previousRandomNumber = -1;
 
 function randomSquare() {
   const squares = state.view.squares;
@@ -55,7 +59,7 @@ function randomSquare() {
   randomSquare.classList.add(style.enemy);
   state.value.hitPosition = randomSquare.id;
 
-  previousRandomNumber = randomNumber; // Atualiza a posição anterior
+  previousRandomNumber = randomNumber; 
 }
 
 function countDown() {
@@ -66,6 +70,7 @@ function countDown() {
     clearInterval(state.actions.countDownTimerId);
     clearInterval(state.actions.timerId);
     alert('Game Over! O seu resultado foi: ' + state.value.result);
+    window.location.reload();
   }
 }
 
@@ -75,7 +80,7 @@ function addListenerHitBox(squares) {
       const hitPosition = state.value.hitPosition;
       if (square.id === hitPosition) {
         setTimeout(() => {
-          randomSquare(true); // Troca de posição rapidamente
+          randomSquare(true); 
         }, 150);
       }
     });
@@ -86,13 +91,13 @@ function addListenerHitBox(squares) {
 
         if (state.value.result % 10 === 0) {
           state.value.result += 10;
-          playSound('multiplo10.mp3', 1); 
+          playSound(multiplo10, 1); 
         } else if (state.value.result % 50 === 0){
           state.value.life += 3;
           state.value.currentTime += 60;
-          playSound('multiplo50.mp3', 1);
+          playSound(multiplo50, 1);
         } else {
-          playSound('hit.mp3');
+          playSound(hit);
         }
 
         state.view.score.set(state.value.result);
@@ -103,7 +108,7 @@ function addListenerHitBox(squares) {
         if(state.value.wrongClicks % 3 === 0){
           state.value.life--;
           if(state.value.life === 0){
-            playSound('gameOver.mp3', 1);
+            playSound(gameOver, 1);
           }
           state.value.wrongClicks = 0;
         }
@@ -113,7 +118,7 @@ function addListenerHitBox(squares) {
 }
 
 function playSound(audioName) {
-  let audio = new Audio(`./src/assets/audios/${audioName}`);
+  let audio = new Audio(`${audioName}`);
   audio.volume = 0.2;
   audio.play();
 }

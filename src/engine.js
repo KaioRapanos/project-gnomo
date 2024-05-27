@@ -12,7 +12,7 @@ const state = {
       hitPosition: 0,
       
       result: 0,
-      currentTime: 100000000,
+      currentTime: 100,
     },
     actions: {
       timerId: null,

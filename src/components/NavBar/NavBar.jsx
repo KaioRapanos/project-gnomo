@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import state from '../../engine';
 import style from './NavBar.module.css';
 import { playSound } from '../../initialize';
+import player from '../../assets/images/giphy2.gif'
 
 const NavBar = () => {
   const [timeLeft, setTimeLeft] = useState(state.value.currentTime);
@@ -25,7 +26,7 @@ const NavBar = () => {
 
   function lifeChecker(){
     if(state.value.life === 0){
-      alert("Suas vidas acabaram");
+      alert("Suas vidas acabaram e seus pontos foram:"+ state.value.result);
       window.location.reload();
     }
   }
@@ -41,7 +42,7 @@ const NavBar = () => {
         <h2>{score}</h2>
       </div>
       <div className={style.menuLive}>
-        <img src='./src/assets/images/giphy2.gif' alt='player' />
+        <img src={player} alt='player' />
         <h2>x{state.value.life}</h2>
       </div>
     </div>

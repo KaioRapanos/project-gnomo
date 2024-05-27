@@ -1,8 +1,9 @@
 import { randomSquare, countDown } from './components/Panel/Panel';
 import state from './engine';
+import cheetos from '../src/assets/audios/Cheetos.mp3'
 
 export function playSound(audioName, volume = 0.2 , loop = false) {
-  let audio = new Audio(`./src/assets/audios/${audioName}`);
+  let audio = new Audio(`${audioName}`);
   audio.volume = volume;
 
   if(loop){
@@ -15,8 +16,8 @@ let isAudioPlaying = false;
 
 document.addEventListener('click', function onFirstInteraction() {
   if (!isAudioPlaying) {
-    playSound('Cheetos.mp3', 0.2, true);
-    isAudioPlaying = true; // Marca o áudio como iniciado
+    playSound(cheetos, 0.2, true);
+    isAudioPlaying = true;
   }
 });
 
